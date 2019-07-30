@@ -3,7 +3,7 @@ from keras.layers import Input, Convolution2D, Flatten, Dense, Dropout, ELU, Lam
 from keras.callbacks import ModelCheckpoint, CSVLogger
 import keras.backend as K
 from config import *
-from load_data import generate_data_batch, split_train_val
+from dataloader import generate_data_batch, split_train_val
 
 
 def get_nvidia_model(summary=True):
@@ -80,8 +80,8 @@ if __name__ == '__main__':
 
     # start the training
     nvidia_net.fit_generator(generator=generate_data_batch(train_data, augment_data=True, bias=CONFIG['bias']),
-                         samples_per_epoch=300*CONFIG['batchsize'],
-                         nb_epoch=50,
-                         validation_data=generate_data_batch(val_data, augment_data=False, bias=1.0),
-                         nb_val_samples=100*CONFIG['batchsize'],
-                         callbacks=[checkpointer, logger])
+                             steps_per_epoch=300*CONFIG['batchsize'],
+                             epochs=50,
+                             validation_data=generate_data_batch(val_data, augment_data=False, bias=1.0),
+                             validation_steps=100*CONFIG['batchsize'],
+                             callbacks=[checkpointer, logger])

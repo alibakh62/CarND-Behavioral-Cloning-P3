@@ -1,3 +1,5 @@
 .DS_Store
 .ipynb_checkpoints
 data/IMG
+data/IMG_mine
+__pycache__
