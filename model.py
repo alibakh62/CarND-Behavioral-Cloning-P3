@@ -13,7 +13,7 @@ def train():
     with open('logs/model.json', 'w') as f:
         f.write(json.dumps(json.loads(model.to_json()), indent=2))
 
-    checkpoint = ModelCheckpoint('checkpoints/model.h5',
+    checkpoint = ModelCheckpoint('logs/model.h5',
                                   monitor='val_loss',
                                   save_best_only=True)
     logger = CSVLogger(filename='logs/history.csv')
